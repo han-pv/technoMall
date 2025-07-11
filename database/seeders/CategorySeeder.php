@@ -12,6 +12,43 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $objs = [
+            [
+                'name' => 'PC',
+                'subcategories' => [
+                    'Monitor',
+                    'Case',
+                    'Motherboard',
+                    'WebCam',
+                    'Mouse',
+                    'Keyboard',
+                    'Speaker',
+                ]
+            ],
+            [
+                'name' => 'Laptop',
+                'subcategories' => [
+                    'Gaming',
+                    'Notebook',
+                    'Ultrabook',
+                    'Macbook',
+                ]
+            ],
+            [
+                'name' => 'Phone and Tablet',
+                'subcategories' => [
+                    'Phone',
+                    'Tablet',
+                ]
+            ],
+            [
+                'name' => 'Smart Watch and Accessories',
+                'subcategories' => [
+                    'Smart Watch',
+                    'Headphone',
+                    'Microphone',
+                ]
+            ],
+        ];
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Color;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ColorSeeder extends Seeder
 {
@@ -12,6 +13,17 @@ class ColorSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $objs = [
+            'white',
+            'gray',
+            'black',
+            'silver',
+        ];
+
+        foreach($objs as $obj) {
+            Color::create([
+                'name' => $obj,
+            ]);
+        }
     }
 }
