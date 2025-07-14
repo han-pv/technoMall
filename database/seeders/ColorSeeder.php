@@ -14,15 +14,17 @@ class ColorSeeder extends Seeder
     public function run(): void
     {
         $objs = [
-            'white',
-            'gray',
-            'black',
-            'silver',
+           ['name' => 'white', 'name_tm' => 'ak', 'name_ru' => 'белый'],
+           ['name' => 'gray', 'name_tm' => 'çal', 'name_ru' => 'серый'],
+           ['name' => 'black', 'name_tm' => 'gara', 'name_ru' => 'черный'],
+           ['name' => 'silver', 'name_tm' => 'kümüşsow', 'name_ru' => 'серебристый'],
         ];
 
         foreach($objs as $obj) {
             Color::create([
-                'name' => $obj,
+                'name' => $obj['name'],
+                'name_tm' => $obj['name_tm'],
+                'name_ru' => $obj['name_ru'],
             ]);
         }
     }

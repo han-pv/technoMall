@@ -13,12 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'username' => 'admin',
-            'is_admin' => 1,
-        ]);
+        // User::factory()->create([
+        //     'username' => 'admin',
+        //     'is_admin' => 1,
+        // ]);
 
-        User::factory(10)->create();
+        // User::factory(10)->create();
+
+        $this->call([
+            // CategorySeeder::class,
+            BrandModelSeeder::class,
+        ]);
 
     }
 }

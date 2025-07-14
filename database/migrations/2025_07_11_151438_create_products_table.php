@@ -18,9 +18,13 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained()->onDelete('cascade');
             $table->foreignId('brand_model_id')->constrained()->onDelete('cascade');
             $table->foreignId('color_id')->constrained()->onDelete('cascade');
-            $table->string('slug');
+            $table->string('slug')->index();
             $table->string('title');
+            $table->string('title_tm')->nullable();
+            $table->string('title_ru')->nullable();
             $table->text('description')->nullable();
+            $table->text('description_tm')->nullable();
+            $table->text('description_ru')->nullable();
             $table->string('image')->nullable();
             $table->decimal('price', 8, 2);
             $table->boolean('is_stock')->default(0);
