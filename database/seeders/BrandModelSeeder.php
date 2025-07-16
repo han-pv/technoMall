@@ -15,7 +15,7 @@ class BrandModelSeeder extends Seeder
      */
     public function run(): void
     {
-        $objs = [
+         $objs = [
             [
                 'name' => 'Asus',
                 'models' => [
@@ -56,7 +56,7 @@ class BrandModelSeeder extends Seeder
                     'Phone' => ['Galaxy S23', 'Galaxy A54', 'Galaxy Z Flip'],
                     'Tablet' => ['Galaxy Tab S9', 'Galaxy Tab A8'],
                     'Smart Watch' => ['Galaxy Watch 6', 'Galaxy Watch Active 2'],
-                    'Monitor' => ['Smart Monitor M7', 'Odyssey G5'],
+                    'Monitors' => ['Smart Monitor M7', 'Odyssey G5'],
                 ]
             ],
             [
@@ -84,23 +84,23 @@ class BrandModelSeeder extends Seeder
                 ]
             ],
         ];
-        
+
+
         foreach ($objs as $obj) {
             $brand = Brand::create([
                 'name' => $obj['name'],
             ]);
-            $key = array_keys($obj['models']);
-            // $subcategory = Category::where('name', $key);
-            foreach ($obj['models'] as $model) {
-                foreach ($model as $name) {
+
+            foreach ($obj['models'] as $subcategoryName => $models) {
+                $subcategory = Category::where('name', $subcategoryName)->first();
+
+                foreach ($models as $modelName) {
                     BrandModel::create([
                         'brand_id' => $brand->id,
-                        'category_id' => count($key),
-                        'name' => $name,
-
+                        'category_id' => $subcategory->id,
+                        'name' => $modelName,
                     ]);
                 }
-
             }
         }
 
