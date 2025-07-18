@@ -6,8 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
     public function brandModels()
     {
         return $this->hasMany(BrandModel::class);
+    }
+    public function getName() {
+        return $this->name;
     }
 }
