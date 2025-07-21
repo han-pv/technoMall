@@ -30,7 +30,7 @@ class CategorySeeder extends Seeder
             ],
             [
                 'name' => 'Laptops',
-                'name_tm' => 'Notebooks',
+                'name_tm' => 'Noutbuklar',
                 'name_ru' => 'ноутбук',
                 'subcategories' => [
                     ['name' => "Gaming", 'name_tm' => 'Oýun üçin kompýuter'],

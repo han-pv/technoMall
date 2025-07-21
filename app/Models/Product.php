@@ -26,7 +26,31 @@ class Product extends Model
     {
         return $this->belongsTo(Color::class);
     }
-        public function tags() {
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getTitle()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->title_tm ?: $this->title;
+        } else if ($locale == 'ru') {
+            return $this->title_ru ?: $this->title;
+        }
+        return $this->title;
+    }
+    public function getDescription()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->description_tm ?: $this->description;
+        } else if ($locale == 'ru') {
+            return $this->description_ru ?: $this->description;
+        }
+        return $this->description;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,11 +13,18 @@ class HomeController extends Controller
     {
 
         $categories = Category::whereNull('parent_id')
+            ->with('children')
+            ->get();
+
+        $discountProducts = Product::where('is_discount', 1)
+            ->orderBy('updated_at', 'desc')
+            ->take(4)
             ->get();
 
         return view('home.index')->with(
             [
                 'categories' => $categories,
+                'discountProducts' => $discountProducts,
             ]
         );
     }
