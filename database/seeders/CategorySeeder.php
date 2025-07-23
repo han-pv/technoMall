@@ -19,43 +19,43 @@ class CategorySeeder extends Seeder
                 'name_tm' => 'PK',
                 'name_ru' => 'ПК',
                 'subcategories' => [
-                    ['name' => "Monitors", 'name_tm' => 'Monitorlar'],
-                    ['name' => "Case", 'name_tm' => 'Monitorlar'],
-                    ['name' => "Motherboard", 'name_tm' => 'Enelik plata'],
-                    ['name' => "WebCam", 'name_tm' => 'Web kamera'],
-                    ['name' => "Mouse", 'name_tm' => 'Syçanjyk'],
-                    ['name' => "Keyboard", 'name_tm' => 'Klawiatura'],
-                    ['name' => "Speaker", 'name_tm' => 'Kolonka'],
+                    ['name' => "Monitors", 'name_tm' => 'Monitorlar', 'name_ru' => 'Мониторы',],
+                    ['name' => "Cases", 'name_tm' => 'Keyslar', 'name_ru' => 'Кейсы',],
+                    ['name' => "Motherboards", 'name_tm' => 'Enelik platalar', 'name_ru' => 'Матрицы',],
+                    ['name' => "WebCams", 'name_tm' => 'Web kameralar', 'name_ru' => 'Веб камеры',],
+                    ['name' => "Mouses", 'name_tm' => 'Syçanjyklar', 'name_ru' => 'Мышьи',],
+                    ['name' => "Keyboards", 'name_tm' => 'Klawiaturalar', 'name_ru' => 'Клавиатуры',],
+                    ['name' => "Speakers", 'name_tm' => 'Kolonkalar', 'name_ru' => 'Колонки',],
                 ]
             ],
             [
                 'name' => 'Laptops',
-                'name_tm' => 'Noutbuklar',
-                'name_ru' => 'ноутбук',
+                'name_tm' => 'Notebooks',
+                'name_ru' => 'Ноутбуки',
                 'subcategories' => [
-                    ['name' => "Gaming", 'name_tm' => 'Oýun üçin kompýuter'],
-                    ['name' => "Notebook", 'name_tm' => 'Notebook'],
-                    ['name' => "Ultrabook", 'name_tm' => 'Ultrabook'],
-                    ['name' => "Macbook", 'name_tm' => 'Macbook'],
+                    ['name' => "Gamings", 'name_tm' => 'Oýun üçin kompýuterlar', 'name_ru' => 'Для игры',],
+                    ['name' => "Notebooks", 'name_tm' => 'Noutbuklar', 'name_ru' => 'Ноутбуки',],
+                    ['name' => "Ultrabooks", 'name_tm' => 'Ultrabuklar', 'name_ru' => 'Ултрабуки',],
+                    ['name' => "Macbooks", 'name_tm' => 'Makbuklar', 'name_ru' => 'Макбуки',],
                 ]
             ],
             [
                 'name' => 'Phones and Tablets',
                 'name_tm' => 'Telefonlar we Planşetler',
-                'name_ru' => 'Телефоны и планшеты',
+                'name_ru' => 'Телефоны и Планшеты',
                 'subcategories' => [
-                    ['name' => "Phone", 'name_tm' => 'Telefon'],
-                    ['name' => "Tablet", 'name_tm' => 'Planşet'],
+                    ['name' => "Phones", 'name_tm' => 'Telefonlar', 'name_ru' => 'Макбуки',],
+                    ['name' => "Tablets", 'name_tm' => 'Planşetlar', 'name_ru' => 'Макбуки',],
                 ]
             ],
             [
                 'name' => 'Smart Watches and Accessories',
-                'name_tm' => 'Akylly sagatlar we aksesuarlar',
-                'name_ru' => 'Умные часы и аксессуары',
+                'name_tm' => 'Akylly sagatlar we Aksesuarlar',
+                'name_ru' => 'Умные часы и Аксессуары',
                 'subcategories' => [
-                     ['name' => "Smart Watch", 'name_tm' => 'Akylly sagat'],
-                     ['name' => "Headphone", 'name_tm' => 'Gulaklyk'],
-                     ['name' => "Microphone", 'name_tm' => 'Mikrofon'],
+                     ['name' => "Smart Watchs", 'name_tm' => 'Akylly sagatlar', 'name_ru' => 'Умные часы',],
+                     ['name' => "Headphones", 'name_tm' => 'Gulaklyklar', 'name_ru' => 'Наушники',],
+                     ['name' => "Microphones", 'name_tm' => 'Mikrofonlar', 'name_ru' => 'Микрофоны',],
                 ]
             ],
         ];
@@ -72,7 +72,7 @@ class CategorySeeder extends Seeder
                     'parent_id' => $category->id,
                     'name' => $subcategories['name'],
                     'name_tm' => $subcategories['name_tm'],
-                    'name_ru' => null,
+                    'name_ru' => $subcategories['name_ru'],
                 ]);
             }
         }
