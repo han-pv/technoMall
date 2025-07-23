@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
     <div class="container-xxl">
-        <a class="navbar-brand fw-bold fs-3" href="indextw.html">@lang('app.appName') </a>
+        <a class="navbar-brand fw-bold fs-3" href="{{ route('home') }}">@lang('app.appName') </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Переключить навигацию">
             <span class="navbar-toggler-icon"></span>
@@ -19,11 +19,12 @@
                     </ul>
                 </li>
             </ul> -->
-            <form class="d-flex my-2 my-lg-0 flex-grow-1 mx-lg-5 search-bar">
-                <input class="form-control rounded-start-pill py-2 border-primary" type="search"
-                    placeholder="@lang('app.search')... " aria-label="Поиск">
+            <form {{ route('products.index') }} method="get" class="d-flex my-2 my-lg-0 flex-grow-1 mx-lg-5">
+                <input class="form-control rounded-start-pill py-2 border-primary" type="text" id="q" name="q"
+                    value="{{ $f_q ? $f_q : '' }}" placeholder="@lang('app.search')... " aria-label="search">
                 <button class="btn btn-primary rounded-end-pill px-4" type="submit"><i
-                        class="bi bi-search text-dark"></i></button>
+                        class="bi bi-search text-dark"></i>
+                </button>
             </form>
             <ul class="navbar-nav h5 ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -59,13 +60,16 @@
             @foreach ($categories as $category)
                 <div class="d-inline me-5">
                     <div class="btn-group">
-                        <a href="#" class="btn btn-outline-primary">{{ $category->getName() }}</a>
+                        <a href="{{ route('products.index', ['category' => $category->id]) }}"
+                            class="btn btn-outline-primary">{{ $category->getName() }}</a>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                             data-bs-toggle="dropdown" aria-expanded="false">
                         </button>
                         <ul class="dropdown-menu">
                             @foreach ($category->children as $child)
-                            <li><a class="dropdown-item" href="#">{{ $child->getName() }}</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ route('products.index', ['category' => $child->id]) }}">{{ $child->getName() }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

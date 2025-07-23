@@ -21,10 +21,16 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
+        $topProducts = Product::orderBy('viewed', 'desc')
+            ->take(8)
+            ->get();
+
         return view('home.index')->with(
             [
                 'categories' => $categories,
                 'discountProducts' => $discountProducts,
+                'topProducts' => $topProducts,
+                'f_q' => null,
             ]
         );
     }
