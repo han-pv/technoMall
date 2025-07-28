@@ -1,11 +1,17 @@
 <div class="col">
     <div
-        class="card h-100 border-{{ $obj->is_discount ? ($obj->discount_precent >= 80 ? 'danger' : ($obj->discount_precent >= 60 ? 'warning' : 'success')) : 'primary' }} shadow-sm">
+        class="card h-100  border-{{ $obj->is_discount ? ($obj->discount_precent >= 80 ? 'danger' : ($obj->discount_precent >= 60 ? 'warning' : 'success')) : 'primary' }} shadow-sm">
         <a href="{{ route('products.show', [$obj->slug]) }}" class="text-decoration-none">
             @if ($obj->is_discount)
                 <span
                     class="badge bg-{{ ($obj->discount_precent >= 80 ? 'danger' : ($obj->discount_precent >= 60 ? 'warning' : 'success')) }}  position-absolute top-0 start-0 m-2 fs-6">
                     -{{ $obj->discount_precent }}%
+                </span>
+            @endif
+            @if (!($obj->is_stock))
+                <span
+                    class="badge bg-danger position-absolute top-0 end-0 m-2 fs-6">
+                    @lang('app.IsNotStock')
                 </span>
             @endif
             <img src="{{ asset('img/products/defult.jpg') }}" class="card-img-top p-3" alt="{{ $obj->getTitle() }}">

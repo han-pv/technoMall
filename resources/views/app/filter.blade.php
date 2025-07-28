@@ -1,12 +1,22 @@
-<form action="{{ route('products.index') }}" method="get" class="mb-5">
+<form action="{{ route('products.index', array_merge(request()->query())) }}" method="get" class="mb-5">
+    @foreach (request()->query() as $key => $value)
+        @if (!in_array($key, ['brand', 'brandModel', 'color', 'minPrice', 'maxPrice', 'saleProducts', 'topProducts']))
+            @if (is_array($value))
+                @foreach ($value as $val)
+                    <input type="hidden" name="{{ $key }}[]" value="{{ $val }}">
+                @endforeach
+            @else
+                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+            @endif
+        @endif
+    @endforeach
 
     <div class="mb-3">
         <label for="brand" class="form-label">Brand:</label>
         <select id="brand" name="brand" class="form-select">
             <option value="">-</option>
             @foreach ($brands as $brand)
-                <option value="{{ $brand->id }}" {{ $brand->id == $f_brand ? 'selected' : '' }}>{{ $brand->name }}
-                </option>
+                <option value="{{ $brand->id }}" {{ $brand->id == $f_brand ? 'selected' : '' }}>{{ $brand->name }}</option>
             @endforeach
         </select>
     </div>
@@ -28,8 +38,7 @@
         <select id="color" name="color[]" class="form-select" multiple>
             <option value="">-</option>
             @foreach ($colors as $color)
-                <option value="{{ $color->id }}" {{ $color->id == $f_color ? 'selected' : '' }}>{{ $color->name }}
-                </option>
+                <option value="{{ $color->id }}" {{ in_array($color->id, (array)$f_color) ? 'selected' : '' }}>{{ $color->name }}</option>
             @endforeach
         </select>
     </div>
@@ -38,13 +47,11 @@
         <div class="d-flex">
             <div class="me-2">
                 Min:
-                <input type="text" name="minPrice" value="{{ $f_minPrice > 0 ? $f_minPrice : " " }}"
-                    class="form-control">
+                <input type="text" name="minPrice" value="{{ $f_minPrice > 0 ? $f_minPrice : '' }}" class="form-control">
             </div>
             <div>
                 Max:
-                <input type="text" name="maxPrice" value="{{ $f_maxPrice > 0 ? $f_maxPrice : " " }}"
-                    class="form-control">
+                <input type="text" name="maxPrice" value="{{ $f_maxPrice > 0 ? $f_maxPrice : '' }}" class="form-control">
             </div>
         </div>
         <div id="title" class="form-text"></div>
@@ -56,7 +63,7 @@
         </label>
     </div>
     <div class="form-check mb-3">
-        <input class="form-check-input" type="checkbox" value="1" id="topProducts" name="topProducts"  role="switch" {{ $f_topProducts ? 'checked' : '' }}>
+        <input class="form-check-input" type="checkbox" value="1" id="topProducts" name="topProducts" role="switch" {{ $f_topProducts ? 'checked' : '' }}>
         <label class="form-check-label" for="topProducts">
             @lang('app.topProducts')
         </label>

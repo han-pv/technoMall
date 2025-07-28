@@ -11,10 +11,13 @@ Route::controller(HomeController::class)
         Route::get('locale/{locale}', 'locale')->name('locale')->where('locale', '[a-z]+');
     });
 
-Route::controller(ProductController::class)
-    ->prefix('products')
-    ->name('products.')
+Route::middleware('guest')
     ->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('/{slug}', 'show')->name('show')->where('slug', '[A-Za-z0-9\-]+');
+        Route::controller(ProductController::class)
+            ->prefix('products')
+            ->name('products.')
+            ->group(function () {
+                Route::get('', 'index')->name('index');
+                Route::get('/{slug}', 'show')->name('show')->where('slug', '[A-Za-z0-9\-]+');
+            });
     });

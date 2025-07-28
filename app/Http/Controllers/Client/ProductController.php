@@ -60,19 +60,17 @@ class ProductController extends Controller
             ->when($f_maxPrice > 0, function ($query) use ($f_maxPrice) {
                 return $query->where('price', "<=", $f_maxPrice);
             })
-            ->when($f_saleProducts  == 1, function ($query) {
+            ->when($f_saleProducts == 1, function ($query) {
                 return $query->where('is_discount', 1);
             })
-            ->when($f_topProducts  == 1, function ($query) {
+            ->when($f_topProducts == 1, function ($query) {
                 return $query->orderBy('viewed', 'desc');
             })
             ->inRandomOrder()
             ->paginate(28)
             ->withQueryString();
 
-        $categories = Category::whereNull('parent_id')
-            ->with('children')
-            ->get();
+        // categories => Providers/AppServiceProvider.php
 
         $colors = Color::orderBy('name')
             ->get();
@@ -84,7 +82,6 @@ class ProductController extends Controller
         return view('products.index')->with(
             [
                 'products' => $products,
-                'categories' => $categories,
                 'brands' => $brands,
                 'colors' => $colors,
                 'f_q' => $f_q,
@@ -98,5 +95,24 @@ class ProductController extends Controller
                 'f_topProducts' => $f_topProducts,
             ]
         );
+    }
+
+    public function show($slug)
+    {
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        $similarProducts = Product::where('category_id', $product->category_id)
+            ->whereNot('slug', $slug)
+            ->where('is_stock', 1)
+            ->take(4)
+            ->get();
+
+        return view('products.show')->with(
+            [
+                'product' => $product,
+                'similarProducts' => $similarProducts,
+            ]
+        );
+
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Home |')
 @section('content')
     <div class="container-xxl mb-5 py-4">
         <div class="h2 mb-4 text-dark">@lang('app.saleProducts') </div>

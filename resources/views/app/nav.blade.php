@@ -6,24 +6,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle fw-bold" href="indextw.html" id="navbarDropdownCategories"
-                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-grid-3x3-gap-fill me-1"></i> @lang('app.categories')
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-                        @foreach ($categories as $category)
-                            <li><a class="dropdown-item" href="#">{{  $category->name }}</a></li>
-                        @endforeach
-                    </ul>
-                </li>
-            </ul> -->
-            <form {{ route('products.index') }} method="get" class="d-flex my-2 my-lg-0 flex-grow-1 mx-lg-5">
-                <input class="form-control rounded-start-pill py-2 border-primary" type="text" id="q" name="q"
-                    value="{{ $f_q ? $f_q : '' }}" placeholder="@lang('app.search')... " aria-label="search">
-                <button class="btn btn-primary rounded-end-pill px-4" type="submit"><i
-                        class="bi bi-search text-dark"></i>
+            <form action="{{ route('products.index', array_merge(request()->query(), request()->only('category'))) }}"
+                method="get" role="search" class="d-flex my-2 my-lg-0 flex-grow-1 mx-lg-5">
+                <input class="form-control rounded-start-pill border-primary border-end-0 px-4 py-2" type="text" id="q"
+                    name="q" value="{{ request('q') }}" placeholder="@lang('app.search')..." aria-label="search">
+                @foreach (request()->query() as $key => $value)
+                    @if ($key !== 'q')
+                        @if (is_array($value))
+                            @foreach ($value as $val)
+                                <input type="hidden" name="{{ $key }}[]" value="{{ $val }}">
+                            @endforeach
+                        @else
+                            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                        @endif
+                    @endif
+                @endforeach
+                @if(request()->has('q'))
+                    <div class="bg-light border border-start-0 border-primary">
+                        <a href="{{ route('products.index', array_merge(request()->except('q'))) }}"
+                            class="btn btn-close mt-2 me-2" aria-label="Close"></a>
+                    </div>
+                @endif
+                <button class="btn btn-primary rounded-end-pill px-4" type="submit">
+                    <i class="bi bi-search text-light"></i>
                 </button>
             </form>
             <ul class="navbar-nav h5 ms-auto mb-2 mb-lg-0">
@@ -60,7 +65,7 @@
             @foreach ($categories as $category)
                 <div class="d-inline me-5">
                     <div class="btn-group">
-                        <a href="{{ route('products.index', ['category' => $category->id]) }}"
+                        <a href="{{ route('products.index', array_merge(request()->query(), ['category' => $category->id])) }}"
                             class="btn btn-outline-primary">{{ $category->getName() }}</a>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,13 +73,19 @@
                         <ul class="dropdown-menu">
                             @foreach ($category->children as $child)
                                 <li><a class="dropdown-item"
-                                        href="{{ route('products.index', ['category' => $child->id]) }}">{{ $child->getName() }}</a>
+                                        href="{{ route('products.index', array_merge(request()->query(), ['category' => $child->id])) }}">{{ $child->getName() }}</a>
                                 </li>
                             @endforeach
                         </ul>
                     </div>
                 </div>
             @endforeach
+            @if(request()->has('category'))
+                <div class="d-inline">
+                    <a href="{{ route('products.index', request()->except('category')) }}"
+                        class="btn btn-sm btn-secondary">Clear Category</a>
+                </div>
+            @endif
         </div>
     </div>
 </div>

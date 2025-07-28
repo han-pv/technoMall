@@ -11,11 +11,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-
-        $categories = Category::whereNull('parent_id')
-            ->with('children')
-            ->get();
-
         $discountProducts = Product::where('is_discount', 1)
             ->orderBy('updated_at', 'desc')
             ->take(4)
@@ -25,9 +20,10 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
+        // categories => Providers/AppServiceProvider.php
+
         return view('home.index')->with(
             [
-                'categories' => $categories,
                 'discountProducts' => $discountProducts,
                 'topProducts' => $topProducts,
                 'f_q' => null,
