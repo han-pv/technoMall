@@ -10,8 +10,7 @@
 </head>
 
 <body class="bg-light">
-    @include('app.nav')
-    @include('app.alert')
+    @include('admin.app.alert')
     @yield('content')
 </body>
 

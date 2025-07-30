@@ -79,7 +79,7 @@ class ProductController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('products.index')->with(
+        return view('client.products.index')->with(
             [
                 'products' => $products,
                 'brands' => $brands,
@@ -107,7 +107,7 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
-        return view('products.show')->with(
+        return view('client.products.show')->with(
             [
                 'product' => $product,
                 'similarProducts' => $similarProducts,

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('client.layouts.app')
 @section('title', 'Product |')
 
 @section('content')
@@ -85,7 +85,7 @@
         <div class="h2 mb-4 text-dark">@lang('app.similarProducts') </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 mb-5">
             @foreach ($similarProducts as $obj)
-                @include('app.product-card')
+                @include('client.app.product-card')
             @endforeach
         </div>
     </div>

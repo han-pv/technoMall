@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         // categories => Providers/AppServiceProvider.php
 
-        return view('home.index')->with(
+        return view('client.home.index')->with(
             [
                 'discountProducts' => $discountProducts,
                 'topProducts' => $topProducts,
