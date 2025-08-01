@@ -11,6 +11,7 @@
 
 <body class="bg-light">
     @include('admin.app.alert')
+    @include('admin.app.nav')
     @yield('content')
 </body>
 

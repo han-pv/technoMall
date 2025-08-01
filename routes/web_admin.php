@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::middleware('guest')
@@ -13,7 +14,26 @@ Route::middleware('guest')
 
 Route::middleware('auth')
     ->group(function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::prefix('admin')
+            ->name('admin.')
+            ->group(function () {
+                Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+
+                Route::controller(BrandController::class)
+                    ->prefix('brands')
+                    ->name('brands.')
+                    ->group(function () {
+                        Route::get('create', 'create')->name('create');
+                        Route::post('', 'store')->name('store');
+                        Route::get('{id}/edit', 'edit')->name('edit ')->where(['id' => '[0-9]+']);
+                        Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
+                        Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
+
+                        Route::get('', 'index')->name('index');
+                        Route::get('/{id}', 'show')->name('show')->where('id', '[0-9]+');
+                    });
+
+            });
     });
 
 Route::middleware('auth')
