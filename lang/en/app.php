@@ -6,6 +6,9 @@ return [
     'logout' => 'Logout',
     'username' => 'Username',
     'password' => 'Password',
+    'submit' => 'Submit',
+    'delete' => 'Delete',
+    'cancel' => 'Cancel',
 
     'appName' => 'TECHNOMALL',
     'language' => 'Language',
@@ -46,4 +49,24 @@ return [
     'similarProducts' => 'Similar products',
     'inStock' => 'In stock',
     'outOfStock' => 'Out of stock',
+
+    'saleProducts' => 'Sale products',
+    'topProducts' => 'Top products',
+    'allSale' => 'All sale',
+    'addToCart' => 'Add To Cart',
+    'like' => 'Like',
+    'productsCount' => 'Products count',
+    'settings' => 'Settings',
+    'addNewBrand' => 'Add new brand',
+    'edit' => 'Edit :name',
+    'create' => 'Create :name',
+    'createdAt' => '',
+    'updatedAt' => 'Create :name',
+
+    //messages
+    'successfullyLoggedIn' => 'Successfully Logged In',
+    'successfullyLoggedOut' => 'Successfully Logged Out',
+    'createdSuccessfully' => ':name created successfully',
+    'updatedSuccessfully' => ':name created successfully',
+    'deletedSuccessfully' => ':name created successfully',
 ];

@@ -7,7 +7,7 @@
                 @lang('app.brands')
             </div>
             <div>
-                <a href="{{ route('admin.brands.create') }} " class="btn btn-primary"> @lang('app.addNewBrand') </a>
+                <a href="{{ route('admin.brands.create') }} " class="btn btn-primary">+ @lang('app.addNewBrand') </a>
             </div>
         </div>
 
@@ -17,7 +17,9 @@
                     <th scope="col">#</th>
                     <th scope="col"> @lang('app.name') </th>
                     <th scope="col"> @lang('app.productsCount') </th>
-                    <th scope="col"> @lang('app.settings') </th>
+                    <th scope="col"> @lang('app.createdAt') </th>
+                    <th scope="col"> @lang('app.updatedAt') </th>
+                    <th scope="col"> @lang('app.settings') <i class="bi bi-gear-fill"></i></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,13 +28,20 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $brand->name  }}</td>
                         <td>{{ $brand->products_count  }}</td>
+                        <td>{{ $brand->created_at->format('d.m.Y H:m')  }}</td>
+                        <td>{{ $brand->updated_at->format('d.m.Y H:m')  }}</td>
                         <td>
                             <div class="d-flex">
-                                <a href="{{ url('admin/brands/' . $brand->id .'/edit') }}" class="btn btn-warning m-1"> <i class="bi bi-pencil"></i> </a>
-                                <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="post">
-                                    @method('delete')
+                                <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-warning m-1"> <i
+                                        class="bi bi-pencil"></i> </a>
+
+                                <button type="button" class="btn btn-danger m-1 delete-btn" data-id="{{ $brand->id }}"
+                                    data-name="{{ $brand->name }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i class="bi bi-trash3"></i>
+                                </button>
+                                <form id="deleteForm" method="POST" style="display: none;">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger m-1"> <i class="bi bi-trash3"></i> </button>
+                                    @method('DELETE')
                                 </form>
                             </div>
                         </td>
@@ -40,28 +49,46 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="modal" tabindex="-1">
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Cyndanam pozmak isleyarsinizmi? </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="deleteMessage">Are you sure you want to delete this item?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <form action="{{ route('admin.brands.destroy', $brand->id) }}" method="post">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger"> <i class="bi bi-trash3"></i> </button>
-                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> @lang('app.cancel')
+                        </button>
+                        <button type="button" class="btn btn-danger" id="confirmDelete">@lang('app.delete') </button>
                     </div>
                 </div>
             </div>
         </div>
+
         <script>
-            function deleteModal(brand) {
-                console.log(brand)
-            }
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                const deleteForm = document.getElementById('deleteForm');
+                const deleteMessage = document.getElementById('deleteMessage');
+                let currentId = null;
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        currentId = this.getAttribute('data-id');
+                        const brandName = this.getAttribute('data-name') || '';
+                        deleteMessage.textContent = `Are you sure you want to delete "${brandName}"?`;
+                        deleteForm.action = `/admin/brands/${currentId}`;
+                    });
+                });
+
+                document.getElementById('confirmDelete').addEventListener('click', function () {
+                    deleteForm.submit();
+                });
+            });
         </script>
+
     </div>
 @endsection

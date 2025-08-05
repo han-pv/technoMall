@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-xxl">
         <div class="h4 mt-4 mb-3">
-            @lang('app.createBrand')
+            <a href="{{ route('admin.brands.index') }}"><i class="bi bi-arrow-left-circle h3 text-primary"></i></a> @lang('app.create', ['name' => 'brand'])
         </div>
         <div class="row justify-content-center">
 

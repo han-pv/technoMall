@@ -41,7 +41,7 @@ class BrandController extends Controller
             'name' => $request->name,
         ]);
 
-        return to_route('admin.brands.index');
+        return to_route('admin.brands.index')->with('success', __('app.createdSuccessfully', ['name' => 'Brand']));
     }
 
     /**
@@ -75,7 +75,7 @@ class BrandController extends Controller
             'name' => $request->name,
         ]);
 
-        return to_route('admin.brands.index');
+        return to_route('admin.brands.index')->with( 'success', 'Edited',);
     }
 
     /**
@@ -87,6 +87,6 @@ class BrandController extends Controller
 
         $brand->delete();
 
-        return to_route('admin.brands.index');
+        return to_route('admin.brands.index')->with('success', 'Deleted');
     }
 }

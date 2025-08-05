@@ -17,6 +17,7 @@ class DashboardController extends Controller
             ->withCount('products')
             ->orderBy('name')
             ->get();
+        
 
         return view('admin.dashboard.index')->with([
             'brands' => $brands,

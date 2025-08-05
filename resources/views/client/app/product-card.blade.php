@@ -11,7 +11,7 @@
             @if (!($obj->is_stock))
                 <span
                     class="badge bg-danger position-absolute top-0 end-0 m-2 fs-6">
-                    @lang('app.IsNotStock')
+                    @lang('app.outOfStock')
                 </span>
             @endif
             <img src="{{ asset('img/products/defult.jpg') }}" class="card-img-top p-3" alt="{{ $obj->getTitle() }}">

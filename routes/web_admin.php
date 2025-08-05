@@ -18,14 +18,13 @@ Route::middleware('auth')
             ->name('admin.')
             ->group(function () {
                 Route::get('', [DashboardController::class, 'index'])->name('dashboard');
-
                 Route::controller(BrandController::class)
                     ->prefix('brands')
                     ->name('brands.')
                     ->group(function () {
                         Route::get('create', 'create')->name('create');
                         Route::post('', 'store')->name('store');
-                        Route::get('{id}/edit', 'edit')->name('edit ')->where(['id' => '[0-9]+']);
+                        Route::get('{id}/edit', 'edit')->name('edit')->where(['id' => '[0-9]+']);
                         Route::put('{id}', 'update')->name('update')->where('id', '[0-9]+');
                         Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
 

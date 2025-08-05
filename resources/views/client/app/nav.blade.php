@@ -33,7 +33,7 @@
             </form>
             <ul class="navbar-nav h5 ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('login') }}">
                         <i class="bi bi-person me-1"></i>
                     </a>
                 </li>
@@ -83,7 +83,7 @@
             @if(request()->has('category'))
                 <div class="d-inline">
                     <a href="{{ route('products.index', request()->except('category')) }}"
-                        class="btn btn-sm btn-secondary">Clear Category</a>
+                        class="btn btn-sm btn-secondary">@lang('app.clearCategory') </a>
                 </div>
             @endif
         </div>

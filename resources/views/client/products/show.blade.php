@@ -49,19 +49,19 @@
 
                     <table class="table  table-border">
                         <tr>
-                            <td class="fw-bolder">Category: </td>
+                            <td class="fw-bolder">@lang('app.category'): </td>
                             <td>{{ $product->category->parent->getName() . ' / ' . $product->category->getName() }}</td>
                         </tr>
                         <tr>
-                            <td class="fw-bolder">Brand: </td>
+                            <td class="fw-bolder">@lang('app.brand'): </td>
                             <td>{{ $product->brand->name }}</td>
                         </tr>
                         <tr>
-                            <td class="fw-bolder">Model: </td>
+                            <td class="fw-bolder">@lang('app.model'): </td>
                             <td>{{ $product->brandModel->name }}</td>
                         </tr>
                         <tr>
-                            <td class="fw-bolder">Color: </td>
+                            <td class="fw-bolder">@lang('app.color'): </td>
                             <td>{{ $product->color->getName() }}</td>
                         </tr>
                     </table>
@@ -70,7 +70,7 @@
                         <button
                             class="btn {{ $product->is_stock ? 'btn-warning' : 'btn-warning disabled' }} btn-lg fw-bold py-3"><i
                                 class="bi bi-cart-fill me-2"></i>
-                            @lang('app.addToCard')
+                            @lang('app.addToCart')
                         </button>
                         <button class="btn btn-outline-primary btn-lg py-3"><i class="bi bi-heart-fill me-2"></i>
                             {{ __('app.like') }}

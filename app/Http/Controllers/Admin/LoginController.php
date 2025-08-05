@@ -26,7 +26,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return view('admin.dashboard.index');
+            return to_route('admin.dashboard')
+                ->with([
+                    'success' => (__('app.successfullyLoggedIn')),
+                ]);
         }
 
         return back()->withErrors([
@@ -44,7 +47,7 @@ class LoginController extends Controller
 
         return redirect('/')
             ->with([
-                'success' => 'Successfully Logged Out',
+                'success' => (__('app.successfullyLoggedOut')),
             ]);
     }
 }
