@@ -12,6 +12,10 @@
                         @lang('app.dashboard') </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ route('admin.categories.index') }}">@lang('app.categories')
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('admin.brands.index') }}">@lang('app.brands')
                     </a>
                 </li>

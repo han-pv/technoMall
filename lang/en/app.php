@@ -26,6 +26,8 @@ return [
     'genders' => 'Genders',
     'category' => 'Category',
     'categories' => 'Categories',
+    'subcategory' => 'Subcategory',
+    'subcategories' => 'Subcategories',
     'brand' => 'Brand',
     'brands' => 'Brands',
     'color' => 'Color',
@@ -60,8 +62,8 @@ return [
     'addNewBrand' => 'Add new brand',
     'edit' => 'Edit :name',
     'create' => 'Create :name',
-    'createdAt' => '',
-    'updatedAt' => 'Create :name',
+    'createdAt' => 'Created at',
+    'updatedAt' => 'Updated at',
 
     //messages
     'successfullyLoggedIn' => 'Successfully Logged In',
