@@ -4,10 +4,10 @@
     <div class="container-xxl">
         <div class="d-flex justify-content-between mt-4 mb-3">
             <div class="h4">
-                @lang('app.brands')
+                @lang('app.banners')
             </div>
             <div>
-                <a href="{{ route('admin.brands.create') }} " class="btn btn-primary">+ @lang('app.addNewBrand') </a>
+                <a href="{{ route('admin.banners.create') }} " class="btn btn-primary">+ @lang('app.addNewbanners') </a>
             </div>
         </div>
 
@@ -15,28 +15,32 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col"> @lang('app.name') </th>
-                    <th scope="col"> @lang('app.productsCount') </th>
+                    <th scope="col"> @lang('app.path') </th>
+                    <th scope="col"> @lang('app.images') </th>
                     <th scope="col"> @lang('app.createdAt') </th>
                     <th scope="col"> @lang('app.updatedAt') </th>
                     <th scope="col"> @lang('app.settings') <i class="bi bi-gear-fill"></i></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($brands as $brand)
+                @foreach ($banners as $banner)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $brand->name  }}</td>
-                        <td>{{ $brand->products_count  }}</td>
-                        <td>{{ $brand->created_at->format('d.m.Y H:i')  }}</td>
-                        <td>{{ $brand->updated_at->format('d.m.Y H:i')  }}</td>
+                        <td>
+                           {{ $banner->image_path  }}
+                        </td>
+                        <td>
+                            <img src="{{ asset('storage/'. $banner->image_path)  }}" class="img-fluid w-50" alt="">
+                        </td>
+                        <td>{{ $banner->created_at->format('d.m.Y H:i')  }}</td>
+                        <td>{{ $banner->updated_at->format('d.m.Y H:i')  }}</td>
                         <td>
                             <div class="d-flex">
-                                <a href="{{ route('admin.brands.edit', $brand->id) }}" class="btn btn-warning m-1"> <i
+                                <a href="{{ route('admin.banners.edit', $banner->id) }}" class="btn btn-warning m-1"> <i
                                         class="bi bi-pencil"></i> </a>
 
-                                <button type="button" class="btn btn-danger m-1 delete-btn" data-id="{{ $brand->id }}"
-                                    data-name="{{ $brand->name }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                <button type="button" class="btn btn-danger m-1 delete-btn" data-id="{{ $banner->id }}"
+                                    data-name="{{ $banner->name }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     <i class="bi bi-trash3"></i>
                                 </button>
                                 <form id="deleteForm" method="POST" style="display: none;">
@@ -78,9 +82,9 @@
                 deleteButtons.forEach(button => {
                     button.addEventListener('click', function () {
                         currentId = this.getAttribute('data-id');
-                        const brandName = this.getAttribute('data-name') || '';
-                        deleteMessage.textContent = `Are you sure you want to delete "${brandName}"?`;
-                        deleteForm.action = `/admin/brands/${currentId}`;
+                        const bannerName = this.getAttribute('data-name') || '';
+                        deleteMessage.textContent = `Are you sure you want to delete "${bannerName}"?`;
+                        deleteForm.action = `/admin/banners/${currentId}`;
                     });
                 });
 

@@ -71,9 +71,9 @@ class BrandController extends Controller
             'name' => ['required', 'string', 'max:55'],
         ]);
         $brand = Brand::where('id', $id)->firstOrFail();
-        $brand->update([
-            'name' => $request->name,
-        ]);
+
+        $brand->name = $request->name;
+        $brand->update();
 
         return to_route('admin.brands.index')->with( 'success', 'Edited',);
     }
