@@ -10,7 +10,6 @@ class Category extends Model
         'id',
     ];
     public $timestamps = true;
-
     protected $fillable = [
         'parent_id',
         'name',

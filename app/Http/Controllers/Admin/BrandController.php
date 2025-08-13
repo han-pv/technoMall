@@ -28,9 +28,6 @@ class BrandController extends Controller
         return view('admin.brands.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([

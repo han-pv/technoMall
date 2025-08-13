@@ -12,6 +12,10 @@
                         @lang('app.dashboard') </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link link-warning" aria-current="page" href="{{ route('admin.products.index') }}"><i class="bi bi-box"></i> @lang('app.products')
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('admin.categories.index') }}"><i class="bi bi-bookmarks"></i> @lang('app.categories')
                     </a>
                 </li>
