@@ -7,7 +7,8 @@
                 @lang('app.categories')
             </div>
             <div>
-                <a href="{{ route('admin.categories.create') }} " class="btn btn-primary">+ @lang('app.addNewcategory') </a>
+                <a href="{{ route('admin.categories.create') }} " class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> @lang('app.addNewcategory') </a>
             </div>
         </div>
 

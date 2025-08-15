@@ -33,7 +33,7 @@
             </form>
             <ul class="navbar-nav h5 ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
                         <i class="bi bi-person me-1"></i>
                     </a>
                 </li>

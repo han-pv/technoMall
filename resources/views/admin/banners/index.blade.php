@@ -7,7 +7,8 @@
                 @lang('app.banners')
             </div>
             <div>
-                <a href="{{ route('admin.banners.create') }} " class="btn btn-primary">+ @lang('app.addNewbanners') </a>
+                <a href="{{ route('admin.banners.create') }} " class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i> @lang('app.addNewbanners') </a>
             </div>
         </div>
 
@@ -27,10 +28,10 @@
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>
-                           {{ $banner->image_path  }}
+                            {{ $banner->image_path  }}
                         </td>
                         <td>
-                            <img src="{{ asset('storage/'. $banner->image_path)  }}" class="img-fluid w-50" alt="">
+                            <img src="{{ asset('storage/' . $banner->image_path)  }}" class="img-fluid w-50" alt="">
                         </td>
                         <td>{{ $banner->created_at->format('d.m.Y H:i')  }}</td>
                         <td>{{ $banner->updated_at->format('d.m.Y H:i')  }}</td>

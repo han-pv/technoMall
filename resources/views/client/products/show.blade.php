@@ -6,7 +6,7 @@
         <div class="row gx-4">
             <div class="col-lg-5 mb-4 mb-lg-0">
                 <div class="main-image-display border rounded-3 p-3 text-center shadow-sm">
-                    <img src="{{ asset($product->image ?: 'img/products/defult.jpg') }}" class="img-fluid product-main-img"
+                    <img src="{{ asset($product->image ? 'storage/' . $product->image: 'img/products/defult.jpg') }}" class="img-fluid product-main-img"
                         alt="{{ $product->getTitle() }}">
                 </div>
             </div>
@@ -38,8 +38,9 @@
                     <div class="price-block mb-4">
                         @if($product->is_discount)
                             <span
-                                class="display-5 fw-bold text-danger me-2">{{$product->price * $product->discount_precent / 100 }}
-                                TMT</span>
+                                class="display-5 fw-bold text-danger me-2">
+                                {{number_format($product->price * (1 - $product->discount_precent / 100), 2, '.', '')  }} TMT
+                            </span>
                             <span class="text-muted fs-5 text-decoration-line-through">{{ $product->price }} TMT</span>
                             <span class="badge bg-danger ms-2 fs-6">-{{ $product->discount_precent }}%</span>
                         @else

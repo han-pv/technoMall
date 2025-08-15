@@ -7,7 +7,9 @@
                 @lang('app.brands')
             </div>
             <div>
-                <a href="{{ route('admin.brands.create') }} " class="btn btn-primary">+ @lang('app.addNewBrand') </a>
+                <a href="{{ route('admin.brands.create') }} " class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>@lang('app.addNewBrand')
+                </a>
             </div>
         </div>
 

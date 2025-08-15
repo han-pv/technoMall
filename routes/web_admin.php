@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Admin\ProductController;
 
 Route::middleware('guest')
     ->group(function () {
@@ -62,7 +62,7 @@ Route::middleware('auth')
                         Route::get('/{id}', 'show')->name('show')->where('id', '[0-9]+');
                     });
 
-                Route::controller(BannerController::class)
+                Route::controller(ProductController::class)
                     ->prefix('products')
                     ->name('products.')
                     ->group(function () {
@@ -75,7 +75,6 @@ Route::middleware('auth')
                         Route::get('', 'index')->name('index');
                         Route::get('/{id}', 'show')->name('show')->where('id', '[0-9]+');
                     });
-
             });
     });
 
